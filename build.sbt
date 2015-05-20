@@ -2,6 +2,8 @@ import SonatypeKeys._
 
 sonatypeSettings
 
+bintraySettings
+
 organization := "org.http4s"
 
 name := "jawn-streamz"
@@ -32,7 +34,8 @@ licenses := Seq("Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0.
 
 resolvers ++= Seq(
   "bintray/non" at "http://dl.bintray.com/non/maven",
-  "bintray/scalaz" at "http://dl.bintray.com/scalaz/releases"
+  "bintray/scalaz" at "http://dl.bintray.com/scalaz/releases",
+  "bintray-djspiewak-maven" at "http://dl.bintray.com/djspiewak/maven"
 )
 
 scalacOptions ++= Seq(
@@ -45,6 +48,6 @@ val JawnVersion = "0.7.4"
 libraryDependencies ++= Seq(
   "org.spire-math" %% "jawn-parser" % JawnVersion,
   "org.spire-math" %% "jawn-ast" % JawnVersion % "test",
-  "org.scalaz.stream" %% "scalaz-stream" % "0.7a",
+  "org.scalaz.stream" %% "scalaz-stream" % "0b8034baed5edf0e71b378174f476da1c95121f8",
   "org.specs2" %% "specs2" % "2.4" % "test"
 )

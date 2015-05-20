@@ -3,7 +3,7 @@ package jawnstreamz.examples
 import scala.concurrent.duration._
 import scala.util.Random.nextInt
 import scalaz.concurrent.Task
-import scalaz.stream.{Process, io}
+import scalaz.stream.{Process, io, time}
 import scalaz.stream.Process._
 import jawnstreamz._
 
@@ -18,7 +18,7 @@ object Example extends App {
   // From JSON on disk
   val jsonSource = chunkSizes.through(io.chunkR(getClass.getResourceAsStream("/jawnstreamz/random.json")))
   // Introduce up to a second of lag between chunks
-  val laggedSource = jsonSource.zipWith(awakeEvery(nextInt(1000).millis))((chunk, _) => chunk)
+  val laggedSource = jsonSource.zipWith(time.awakeEvery(nextInt(1000).millis))((chunk, _) => chunk)
   // Print each element of the JSON array as we read it
   val json = laggedSource.unwrapJsonArray.map(_.toString()).to(io.stdOutLines)
   // First run converts process into a Task, second run executes the task for its effects
